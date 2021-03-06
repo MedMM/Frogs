@@ -4,13 +4,12 @@ using UnityEngine;
 
 public class BridgeScript : MonoBehaviour
 {
-    SpriteRenderer spriteRenderer;
+    private SpriteRenderer spriteRenderer;
     private bool isActive = true;
 
-    public Color activeStateColor;
-    public Color disableStateColor;
-
-    public Sprite[] sprites;
+    [SerializeField] private Color activeStateColor;
+    [SerializeField] private Color disableStateColor;
+    [SerializeField] private Sprite[] sprites;
 
     private void Awake()
     {
@@ -21,11 +20,12 @@ public class BridgeScript : MonoBehaviour
     public void SetActiveState(bool state)
     {
         isActive = state;
+        SetColor();
     }
 
     public void SetActiveState()
     {
-        isActive = !isActive;
+        SetActiveState(isActive);
     }
 
     public bool GetActiveState()
@@ -33,7 +33,7 @@ public class BridgeScript : MonoBehaviour
         return isActive;
     }
 
-    void Update()
+    private void SetColor()
     {
         spriteRenderer.color = isActive ? activeStateColor : disableStateColor;
     }
