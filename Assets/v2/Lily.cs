@@ -12,16 +12,6 @@ public class Lily : MonoBehaviour
         BuildBridges();
     }
 
-    public void SetCoordinates(Vector2Int newCoordinates)
-    {
-        coordinates = newCoordinates;
-    }
-
-    public void SetCoordinates(int x, int y)
-    {
-        SetCoordinates(new Vector2Int(x, y));
-    }
-
     private void BuildBridges()
     {
         if (coordinates.y < Board.rows - 1)
@@ -35,4 +25,23 @@ public class Lily : MonoBehaviour
             bridge.transform.SetParent(gameObject.transform);
         }
     }
+
+    private void OnMouseOver()
+    {
+        if (Input.GetKeyDown(KeyCode.Mouse0))
+        {
+            Debug.Log("Lily has been clicked");
+        }
+    }
+
+    public void SetCoordinates(Vector2Int newCoordinates)
+    {
+        coordinates = newCoordinates;
+    }
+
+    public void SetCoordinates(int x, int y)
+    {
+        SetCoordinates(new Vector2Int(x, y));
+    }
+
 }

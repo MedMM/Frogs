@@ -37,4 +37,10 @@ public class BridgeScript : MonoBehaviour
     {
         spriteRenderer.color = isActive ? activeStateColor : disableStateColor;
     }
+
+    private void OnMouseOver()
+    {
+        if (Input.GetKeyDown(KeyCode.Mouse0))
+            Debug.Log("Bridge has been clicked");
+    }
 }
