@@ -51,7 +51,6 @@ public class FrogScript : MonoBehaviour
     private void MoveToPos1()
     {
         StartCoroutine(DoMove(gameObject, frogAnimationSpeed, GameManager.liliesArray[position.x, position.y].GetComponent<WaterLilyScript>().placeForFrog1.transform.position));
-        //transform.position = GameManager.liliesArray[position.x, position.y].GetComponent<WaterLilyScript>().placeForFrog1.transform.position;
     }
 
     private void MoveToPos2()
@@ -357,5 +356,4 @@ public class FrogScript : MonoBehaviour
             yield return null;
         }
     }
-
 }

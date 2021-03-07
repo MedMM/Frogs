@@ -63,7 +63,7 @@ public class GameController : MonoBehaviour
                     if (hit.collider.gameObject.GetComponent<BridgeScript>().GetActiveState())
                     {
                         hit.collider.gameObject.GetComponent<BridgeScript>().SetActiveState(false);
-                        gameObject.GetComponent<Player>().UseCard(currentTeam, Action.Card_RemoveBridge);
+                        //gameObject.GetComponent<Player>().UseCard(currentTeam, Action.Card_RemoveBridge);
                         EndTurn();
                     }
                 }
@@ -79,7 +79,7 @@ public class GameController : MonoBehaviour
 
                     if(numberOfBuilds == 0)
                     {
-                        gameObject.GetComponent<Player>().UseCard(currentTeam, Action.Card_DoubleBuild);
+                        //gameObject.GetComponent<Player>().UseCard(currentTeam, Action.Card_DoubleBuild);
                         EndTurn();
                     }
                 }
@@ -88,7 +88,7 @@ public class GameController : MonoBehaviour
 
             if(action == Action.Card_Parachute)
             {
-                gameObject.GetComponent<Player>().UseCard(currentTeam, Action.Card_Parachute);
+                //gameObject.GetComponent<Player>().UseCard(currentTeam, Action.Card_Parachute);
                 EndTurn();
                 return;
             }
@@ -239,8 +239,6 @@ public class GameController : MonoBehaviour
         action = Action.Nothing;
         //Меняем игрока
         currentTeam = currentTeam == Teams.TeamName.Red_team ? Teams.TeamName.Green_team : Teams.TeamName.Red_team;
-        //_gameObject.GetComponent<Player>().SetCardsOnPanel();
-
 
         //Отображаем аватар игрока который ходит
         if (currentTeam == Teams.TeamName.Red_team)
@@ -258,7 +256,6 @@ public class GameController : MonoBehaviour
 
         //Player.SetCardsOnPanel();
     }
-
 
     public static void SetCards(Player player)
     {

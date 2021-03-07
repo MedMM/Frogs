@@ -806,54 +806,6 @@ RectTransform:
   m_AnchoredPosition: {x: 2.776394, y: 11.486038}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
---- !u!1 &311436613 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 2098504850927969134, guid: 5603b42087569ed46ab22541a401babb,
-    type: 3}
-  m_PrefabInstance: {fileID: 2098504850890153866}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &311436614
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 311436613}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4089dcf5ceaea484ebe08a9ecaf258dc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  teamName: 1
-  card1_Availability: 1
-  card2_Availability: 1
-  card3_Availability: 1
-  card4_Availability: 1
-  card1: {fileID: 2070778023}
-  card2: {fileID: 282369468}
-  card3: {fileID: 1858284383}
-  card4: {fileID: 1424682472}
---- !u!114 &311436615
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 311436613}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4089dcf5ceaea484ebe08a9ecaf258dc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  teamName: 2
-  card1_Availability: 1
-  card2_Availability: 1
-  card3_Availability: 1
-  card4_Availability: 1
-  card1: {fileID: 2070778023}
-  card2: {fileID: 282369468}
-  card3: {fileID: 1858284383}
-  card4: {fileID: 1424682472}
 --- !u!1 &377549501
 GameObject:
   m_ObjectHideFlags: 0
@@ -1728,7 +1680,7 @@ MonoBehaviour:
     type: 3}
   m_PrefabInstance: {fileID: 2098504850890153866}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 311436613}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 79fcc91f36b473b499de96ba7a00b5ed, type: 3}
@@ -4512,12 +4464,12 @@ PrefabInstance:
         type: 3}
       propertyPath: playerGreen
       value: 
-      objectReference: {fileID: 311436614}
+      objectReference: {fileID: 0}
     - target: {fileID: 2098504850927969122, guid: 5603b42087569ed46ab22541a401babb,
         type: 3}
       propertyPath: playerRed
       value: 
-      objectReference: {fileID: 311436615}
+      objectReference: {fileID: 0}
     - target: {fileID: 2098504850927969132, guid: 5603b42087569ed46ab22541a401babb,
         type: 3}
       propertyPath: m_LocalPosition.x
