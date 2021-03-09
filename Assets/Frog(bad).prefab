@@ -144,7 +144,7 @@ GameObject:
   - component: {fileID: 5424885099915154325}
   - component: {fileID: 6743125032390661826}
   m_Layer: 0
-  m_Name: IMG_1972
+  m_Name: Eyes
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

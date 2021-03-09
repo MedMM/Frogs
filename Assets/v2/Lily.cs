@@ -5,7 +5,7 @@ using UnityEngine;
 public class Lily : MonoBehaviour
 {
     [SerializeField] private GameObject bridgePrefab = null;
-    [SerializeField] private Vector2Int coordinates = new Vector2Int(0, 0);
+    [SerializeField] private Vector2Int coordinates = Vector2Int.zero;
 
     private void Start()
     {
@@ -30,9 +30,14 @@ public class Lily : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Mouse0))
         {
-            Debug.Log("Lily has been clicked");
+            Players.Instance.CurrentPlayer.ClickOnLily(this);
         }
     }
+
+    public Vector2Int GetCoordinates()
+    {
+        return coordinates;
+    } 
 
     public void SetCoordinates(Vector2Int newCoordinates)
     {
@@ -43,5 +48,4 @@ public class Lily : MonoBehaviour
     {
         SetCoordinates(new Vector2Int(x, y));
     }
-
 }

@@ -4,15 +4,27 @@ using UnityEngine;
 
 public class Frog : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    [SerializeField] private Vector2Int coordinates = Vector2Int.zero;
+    [SerializeField] private Board board = null;
+    [SerializeField] private Player player = null;
+
+    private void OnMouseOver()
     {
-        
+        if (Input.GetKeyDown(KeyCode.Mouse0))
+        {
+            Players.Instance.CurrentPlayer.ClickOnFrog(this);
+
+        }
     }
 
-    // Update is called once per frame
-    void Update()
+    public void SetPlayer(Player player)
     {
-        
+        this.player = player;
+    }
+
+    public void MoveTo(Lily lily)
+    {
+        coordinates = lily.GetCoordinates();
+        transform.position = lily.transform.position;
     }
 }

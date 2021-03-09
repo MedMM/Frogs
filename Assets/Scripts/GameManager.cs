@@ -48,12 +48,10 @@ public class GameManager : MonoBehaviour
         //Разместить игрока 1
         GameObject player1Base = Instantiate(halfLilyPrefab, new Vector2(liliesArray[2, 0].transform.position.x, liliesArray[2, 0].transform.position.y - 15), Quaternion.Euler(0, 0, 0));
         player1Base.GetComponent<HalfLilyScript>().neighborLily = liliesArray[2, 0]; //Соседняя от базы лилия
-        player1Base.GetComponent<HalfLilyScript>().teamName = Teams.TeamName.Green_team; //Присвоение имени команды
         player1Base.GetComponent<HalfLilyScript>().teamColor = new Color(90f / 255f, 120f / 200f, 60f / 255f); //Цвет команды
 
         GameObject player2Base = Instantiate(halfLilyPrefab, new Vector2(liliesArray[2, 4].transform.position.x, liliesArray[2, 4].transform.position.y + 10), Quaternion.Euler(0, 0, 180));
         player2Base.GetComponent<HalfLilyScript>().neighborLily = liliesArray[2, 4];
-        player2Base.GetComponent<HalfLilyScript>().teamName = Teams.TeamName.Red_team;
         player2Base.GetComponent<HalfLilyScript>().teamColor = new Color(180f / 255f, 120 / 255f, 40 / 255f);
     }
 }

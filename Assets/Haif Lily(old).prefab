@@ -72,7 +72,7 @@ GameObject:
   - component: {fileID: 5169776481042273553}
   - component: {fileID: 4724034199294113912}
   - component: {fileID: 6914961100125411497}
-  - component: {fileID: 6960794662794717879}
+  - component: {fileID: 689119619}
   m_Layer: 0
   m_Name: Haif Lily
   m_TagString: HalfLily
@@ -222,7 +222,7 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 20, y: 10}
   m_EdgeRadius: 0
---- !u!114 &6960794662794717879
+--- !u!114 &689119619
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -231,18 +231,20 @@ MonoBehaviour:
   m_GameObject: {fileID: 5973116461671786795}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 62b0e6c3a07bcda4885bb5516a845e0d, type: 3}
+  m_Script: {fileID: 11500000, guid: d9efdae5f48be6146a35f305ffd529f8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bridgePrefab: {fileID: 181574168865840272, guid: 2a3836d092de2c4489b57f7778c3f441,
+  bridgePrefab: {fileID: 5597744833407122915, guid: 2a3836d092de2c4489b57f7778c3f441,
     type: 3}
-  frogPrefab: {fileID: 2403055813351685822, guid: 853ab034701829442b27cee4df2a454f,
+  frogPrefab: {fileID: 5939866732607942046, guid: 0ff67e7c1aecf2649a02a30c18610cf8,
     type: 3}
-  playerPrefab: {fileID: 9113273122741913540, guid: cbf973ad8197b474e93ceec3e582d066,
-    type: 3}
+  neighborLily: {fileID: 0}
+  bridge: {fileID: 5597744833407122915, guid: 6756cff1fbd5dbb4bb28a57d265a5bb8, type: 3}
   spot1: {fileID: 6258705213707477623}
   spot2: {fileID: 3277628684598047628}
   spot3: {fileID: 3690563364145036590}
+  teamName: 0
+  teamColor: {r: 0, g: 0, b: 0, a: 0}
 --- !u!1 &8387696232567831690
 GameObject:
   m_ObjectHideFlags: 0
