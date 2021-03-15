@@ -24,6 +24,7 @@ public class Player : MonoBehaviour
 
     public void RecordFrogOnTeam(Frog frog)
     {
+        frog.gameObject.name = $"Frog {Players.Instance.GetPlayerIndex(this)}";
         frog.gameObject.GetComponent<SpriteRenderer>().color = teamColor;
         frog.SetPlayer(this);
     }

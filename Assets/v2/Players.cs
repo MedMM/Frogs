@@ -45,4 +45,9 @@ public class Players : MonoBehaviour
             _currentPlayer = players[0];
         }
     }
+
+    public int GetPlayerIndex(Player player)
+    {
+        return players.IndexOf(player);
+    }
 }
