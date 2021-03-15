@@ -32,6 +32,8 @@ public class Players : MonoBehaviour
         {
             _currentPlayer = players[0];
         }
+
+        newPlayer.gameObject.name = $"Player from Team_{GetPlayerIndex(newPlayer)}";
     }
 
     public void NextPlayer()
@@ -44,6 +46,8 @@ public class Players : MonoBehaviour
         {
             _currentPlayer = players[0];
         }
+
+        Debug.Log($"Now Player{GetPlayerIndex(CurrentPlayer)}'s turn!");
     }
 
     public int GetPlayerIndex(Player player)

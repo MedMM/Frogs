@@ -12,7 +12,7 @@ public class HalfLily : MonoBehaviour
     private void Start()
     {
         BuildBridge();
-        var player = Instantiate(playerPrefab, gameObject.transform);
+        var player = Instantiate(playerPrefab);
         var frog1 = Instantiate(frogPrefab, spot1.transform.position, spot1.transform.rotation);
         var frog2 = Instantiate(frogPrefab, spot2.transform.position, spot2.transform.rotation);
         var frog3 = Instantiate(frogPrefab, spot3.transform.position, spot3.transform.rotation);
