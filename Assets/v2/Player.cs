@@ -14,19 +14,16 @@ public class Player : MonoBehaviour
 
     public void SetTeamColor(Color newColor)
     {
-        Debug.Log($"Color changed to {newColor}");
         teamColor = newColor;
     }
 
     public void TakeFrog(Frog frog)
     {
         frogInHand = frog;
-        Debug.Log($"{frog} Frog taken");
     }
 
     public void RecordFrogOnTeam(Frog frog)
     {
-        Debug.Log($"Frog recorded to team {teamColor}");
         frog.gameObject.GetComponent<SpriteRenderer>().color = teamColor;
         frog.SetPlayer(this);
     }
