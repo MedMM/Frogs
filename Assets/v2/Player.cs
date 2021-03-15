@@ -83,7 +83,8 @@ public class Player : MonoBehaviour
         }
         else
         {
-            Debug.Log($"{gameObject.name}. Click on frog");
+            frogInHand = null;
+            ClickOnFrog(frog);
         }
     }
 
@@ -96,6 +97,15 @@ public class Player : MonoBehaviour
         else
         {
             Debug.Log($"{gameObject.name}. Click on lily ");
+        }
+    }
+
+    public void ClickOnBridge(Bridge bridge)
+    {
+        if (bridge.GetActiveState() == false)
+        {
+            bridge.SetActiveState(true);
+            EndTurn();
         }
     }
 }

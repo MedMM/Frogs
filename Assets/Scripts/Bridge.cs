@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BridgeScript : MonoBehaviour
+public class Bridge : MonoBehaviour
 {
     private SpriteRenderer spriteRenderer;
     private bool isActive = true;
@@ -41,6 +41,8 @@ public class BridgeScript : MonoBehaviour
     private void OnMouseOver()
     {
         if (Input.GetKeyDown(KeyCode.Mouse0))
-            Debug.Log("Bridge has been clicked");
+        {
+            Players.Instance.CurrentPlayer.ClickOnBridge(this);
+        }
     }
 }

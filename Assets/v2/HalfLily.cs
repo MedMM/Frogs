@@ -2,7 +2,7 @@
 
 public class HalfLily : MonoBehaviour
 {
-    [SerializeField] private BridgeScript bridgePrefab = null;
+    [SerializeField] private Bridge bridgePrefab = null;
     [SerializeField] private Frog frogPrefab = null;
     [SerializeField] private Player playerPrefab = null;
     [SerializeField] private Transform spot1 = null;

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Frog : MonoBehaviour
 {
-    private Vector2Int coordinates = Vector2Int.zero;
+    [SerializeField] private Vector2Int coordinates = Vector2Int.zero;
     private Board board = null;
     private Player player = null;
 

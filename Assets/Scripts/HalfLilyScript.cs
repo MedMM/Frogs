@@ -50,12 +50,12 @@ public class HalfLilyScript : MonoBehaviour
 
     public void SetBridgeState(bool state)
     {
-        bridge.GetComponent<BridgeScript>().SetActiveState(state);
+        bridge.GetComponent<Bridge>().SetActiveState(state);
     }
 
     public bool GetBridgeState()
     {
-        return bridge.GetComponent<BridgeScript>().GetActiveState();
+        return bridge.GetComponent<Bridge>().GetActiveState();
     }
 
     public void CompleteThePatch(GameObject frog)

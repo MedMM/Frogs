@@ -90,22 +90,22 @@ public class WaterLilyScript : MonoBehaviour
 
     public void SetVerticalBridge(bool state)
     {
-        verBridge.GetComponent<BridgeScript>().SetActiveState(state);
+        verBridge.GetComponent<Bridge>().SetActiveState(state);
     }
 
     public void SetHorizontalBridge(bool state)
     {
-        horBridge.GetComponent<BridgeScript>().SetActiveState(state);
+        horBridge.GetComponent<Bridge>().SetActiveState(state);
     }
 
     public bool GetVerticalBridge()
     {
-        return verBridge.GetComponent<BridgeScript>().GetActiveState();
+        return verBridge.GetComponent<Bridge>().GetActiveState();
     }
 
     public bool GetHorizontalBridge()
     {
-        return horBridge.GetComponent<BridgeScript>().GetActiveState();
+        return horBridge.GetComponent<Bridge>().GetActiveState();
     }
 
     public bool GetOccupiedState()

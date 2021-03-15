@@ -60,9 +60,9 @@ public class GameController : MonoBehaviour
 
                 if (hit.collider.gameObject.tag == "Bridge")
                 {
-                    if (hit.collider.gameObject.GetComponent<BridgeScript>().GetActiveState())
+                    if (hit.collider.gameObject.GetComponent<Bridge>().GetActiveState())
                     {
-                        hit.collider.gameObject.GetComponent<BridgeScript>().SetActiveState(false);
+                        hit.collider.gameObject.GetComponent<Bridge>().SetActiveState(false);
                         //gameObject.GetComponent<Player>().UseCard(currentTeam, Action.Card_RemoveBridge);
                         EndTurn();
                     }
@@ -72,10 +72,10 @@ public class GameController : MonoBehaviour
             //Если выбрана карточка "Двойное строительство"
             if (action == Action.Card_DoubleBuild)
             {
-                if (hit.collider.gameObject.tag == "Bridge" && !hit.collider.gameObject.GetComponent<BridgeScript>().GetActiveState())
+                if (hit.collider.gameObject.tag == "Bridge" && !hit.collider.gameObject.GetComponent<Bridge>().GetActiveState())
                 {
                     numberOfBuilds -= 1;
-                    hit.collider.gameObject.GetComponent<BridgeScript>().SetActiveState(true);
+                    hit.collider.gameObject.GetComponent<Bridge>().SetActiveState(true);
 
                     if(numberOfBuilds == 0)
                     {
@@ -151,9 +151,9 @@ public class GameController : MonoBehaviour
                     }
                     else
                     {
-                        if (hit.collider.gameObject.GetComponent<BridgeScript>().GetActiveState() == false)
+                        if (hit.collider.gameObject.GetComponent<Bridge>().GetActiveState() == false)
                         {
-                            hit.collider.gameObject.GetComponent<BridgeScript>().SetActiveState(true);
+                            hit.collider.gameObject.GetComponent<Bridge>().SetActiveState(true);
                             EndTurn();
                         }
                     }
