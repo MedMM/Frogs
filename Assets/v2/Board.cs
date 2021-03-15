@@ -29,13 +29,20 @@ public class Board : MonoBehaviour
 
         GameObject player1Base = Instantiate(halfLilyPrefab, lilyArray[2, 0].gameObject.transform.position - new Vector3(0, 15, 0),
             Quaternion.Euler(0, 0, 0), gameObject.transform);
+        player1Base.GetComponent<HalfLily>().SetNeighborLily(GetLilyAtPosition(2, 0));
 
         GameObject player2Base = Instantiate(halfLilyPrefab, lilyArray[2, 4].gameObject.transform.position - new Vector3(0, -15, 0),
             Quaternion.Euler(0, 0, 180), gameObject.transform);
+        player2Base.GetComponent<HalfLily>().SetNeighborLily(GetLilyAtPosition(2, 4));
     }
 
     public Lily GetLilyAtPosition(int x, int y)
     {
         return lilyArray[x, y];
+    }
+
+    public Lily GetLilyAtPosition(Vector2Int coordinates)
+    {
+        return GetLilyAtPosition(coordinates.x, coordinates.y);
     }
 }

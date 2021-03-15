@@ -22,7 +22,6 @@ public class FrogScript : MonoBehaviour
     private float frogAnimationSpeed = 0.3f;
     private float frogRotationSpeed = 0.2f;
 
-
     //Переменные которые используются методом frogCanMove();  Поместил тут для отладки
     [SerializeField] private bool onUp = false;
     [SerializeField] private bool onDown = false;

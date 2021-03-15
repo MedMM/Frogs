@@ -4,9 +4,10 @@ using UnityEngine;
 
 public class Frog : MonoBehaviour
 {
-    [SerializeField] private Vector2Int coordinates = Vector2Int.zero;
+    private Vector2Int coordinates = Vector2Int.zero;
     private Board board = null;
     private Player player = null;
+    public bool onMainBase { get; set; } = true;
 
     private void OnMouseOver()
     {
@@ -24,6 +25,11 @@ public class Frog : MonoBehaviour
     public Player GetPlayer()
     {
         return player;
+    }
+
+    public Vector2Int GetCoordinates()
+    {
+        return coordinates;
     }
 
     public void MoveTo(Lily lily)

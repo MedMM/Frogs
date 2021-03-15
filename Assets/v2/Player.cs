@@ -23,7 +23,13 @@ public class Player : MonoBehaviour
     {
         if(frogInHand != null)
         {
+            if (!frogInHand.onMainBase)
+            {
+                board.GetLilyAtPosition(frogInHand.GetCoordinates()).isOccupied = false;
+            }
+
             frogInHand.MoveTo(lily);
+            lily.isOccupied = true;
             EndTurn();
         }
     }
@@ -96,7 +102,7 @@ public class Player : MonoBehaviour
         }
         else
         {
-            Debug.Log($"{gameObject.name}. Click on lily ");
+            Debug.Log("Крутая лилия, согласен");
         }
     }
 

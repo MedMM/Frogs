@@ -17,6 +17,19 @@ public class Bridge : MonoBehaviour
         spriteRenderer.sprite = sprites[Random.Range(0, sprites.Length)];
     }
 
+    private void SetColor()
+    {
+        spriteRenderer.color = isActive ? activeStateColor : disableStateColor;
+    }
+
+    private void OnMouseOver()
+    {
+        if (Input.GetKeyDown(KeyCode.Mouse0))
+        {
+            Players.Instance.CurrentPlayer.ClickOnBridge(this);
+        }
+    }
+
     public void SetActiveState(bool state)
     {
         isActive = state;
@@ -31,18 +44,5 @@ public class Bridge : MonoBehaviour
     public bool GetActiveState()
     {
         return isActive;
-    }
-
-    private void SetColor()
-    {
-        spriteRenderer.color = isActive ? activeStateColor : disableStateColor;
-    }
-
-    private void OnMouseOver()
-    {
-        if (Input.GetKeyDown(KeyCode.Mouse0))
-        {
-            Players.Instance.CurrentPlayer.ClickOnBridge(this);
-        }
     }
 }
