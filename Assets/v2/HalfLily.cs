@@ -20,6 +20,7 @@ public class HalfLily : MonoBehaviour
         player.RecordFrogOnTeam(frog1);
         player.RecordFrogOnTeam(frog2);
         player.RecordFrogOnTeam(frog3);
+        player.SetHalfLily(this);
     }
 
     private void OnMouseOver()

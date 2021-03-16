@@ -4,7 +4,7 @@
 public class Player : MonoBehaviour
 {
     [SerializeField] private GameObject pointer = null;
-    [SerializeField] private Board board = null;
+    [SerializeField] private HalfLily halfLily = null;
     [SerializeField] private Frog frogInHand = null;
     [SerializeField] private Color teamColor = Color.white;
 
@@ -21,17 +21,14 @@ public class Player : MonoBehaviour
 
     private void PlaceFrog(Lily lily)
     {
-        if(frogInHand != null)
+        if (frogInHand.onMainBase == false)
         {
-            if (!frogInHand.onMainBase)
-            {
-                board.GetLilyAtPosition(frogInHand.GetCoordinates()).isOccupied = false;
-            }
-
-            frogInHand.MoveTo(lily);
-            lily.isOccupied = true;
-            EndTurn();
+            Board.Instance.GetLilyAtPosition(frogInHand.GetCoordinates()).isOccupied = false;
         }
+
+        frogInHand.MoveTo(lily);
+        lily.isOccupied = true;
+        EndTurn();
     }
 
     private void HideCursor()
@@ -60,6 +57,17 @@ public class Player : MonoBehaviour
     private void EnemyFrogClick()
     {
         Debug.Log("That's not my frog!");
+    }
+
+    public void SetHalfLily(HalfLily newHalfLily)
+    {
+        if (halfLily == null)
+            halfLily = newHalfLily;
+    }
+
+    public HalfLily GetHalfLily()
+    {
+        return halfLily;
     }
 
     public void SetTeamColor(Color newColor)
@@ -112,6 +120,21 @@ public class Player : MonoBehaviour
         {
             bridge.SetActiveState(true);
             EndTurn();
+        }
+    }
+
+    private void Update()
+    {
+        if (frogInHand != null)
+        {
+            if (Input.GetKeyDown(KeyCode.W))
+                frogInHand.MoveUp();
+            if (Input.GetKeyDown(KeyCode.S))
+                frogInHand.MoveDown();
+            if (Input.GetKeyDown(KeyCode.D))
+                frogInHand.MoveRight();
+            if (Input.GetKeyDown(KeyCode.A))
+                frogInHand.MoveLeft();
         }
     }
 }

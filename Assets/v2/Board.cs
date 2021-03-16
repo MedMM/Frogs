@@ -6,11 +6,21 @@ public class Board : MonoBehaviour
     [SerializeField] private GameObject lilyPrefab = null;
     [SerializeField] private GameObject halfLilyPrefab = null;
     [SerializeField] private float distanceBetweenLilies = 0f;
+    private static Board instance = null;
+    public static Board Instance { get { return instance; } }
+
     private Lily[,] lilyArray = new Lily[rows, rows];
     public const int rows = 5;
 
     private void Awake()
     {
+        if (instance != null && instance != this)
+        {
+            Destroy(this.gameObject);
+            return;
+        }
+        instance = this;
+
         BuildBoard();
     }
 
