@@ -1,6 +1,5 @@
 ﻿using UnityEngine;
 
-
 public class Player : MonoBehaviour
 {
     [SerializeField] private GameObject pointer = null;
@@ -65,14 +64,14 @@ public class Player : MonoBehaviour
             halfLily = newHalfLily;
     }
 
-    public HalfLily GetHalfLily()
-    {
-        return halfLily;
-    }
-
     public void SetTeamColor(Color newColor)
     {
         teamColor = newColor;
+    }
+
+    public HalfLily GetHalfLily()
+    {
+        return halfLily;
     }
 
     public void RecordFrogOnTeam(Frog frog)
@@ -116,11 +115,14 @@ public class Player : MonoBehaviour
 
     public void ClickOnBridge(Bridge bridge)
     {
-        if (bridge.GetActiveState() == false)
-        {
-            bridge.SetActiveState(true);
-            EndTurn();
-        }
+
+        bridge.SetActiveState();
+
+        //if (bridge.GetActiveState() == false)
+        //{
+        //    bridge.SetActiveState(true);
+        //    EndTurn();
+        //}
     }
 
     private void Update()

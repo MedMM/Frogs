@@ -46,7 +46,11 @@ public class Frog : MonoBehaviour
     {
         if (coordinates.y < Board.rows - 1)
         {
-            MoveTo(Board.Instance.GetLilyAtPosition(coordinates + new Vector2Int(0, 1)));
+            if (Board.Instance.GetLilyAtPosition(coordinates).GetVerticalBridge().GetActiveState())
+            {
+                Board.Instance.GetLilyAtPosition(coordinates).GetVerticalBridge().SetActiveState(false);
+                MoveTo(Board.Instance.GetLilyAtPosition(coordinates + new Vector2Int(0, 1)));
+            }
         }
     }
 
@@ -54,7 +58,11 @@ public class Frog : MonoBehaviour
     {
         if (coordinates.y > 0)
         {
-            MoveTo(Board.Instance.GetLilyAtPosition(coordinates + new Vector2Int(0, -1)));
+            if (Board.Instance.GetLilyAtPosition(coordinates - new Vector2Int(0,1)).GetVerticalBridge().GetActiveState())
+            {
+                Board.Instance.GetLilyAtPosition(coordinates - new Vector2Int(0, 1)).GetVerticalBridge().SetActiveState(false);
+                MoveTo(Board.Instance.GetLilyAtPosition(coordinates + new Vector2Int(0, -1)));
+            }
         }
     }
 
@@ -62,7 +70,11 @@ public class Frog : MonoBehaviour
     {
         if (coordinates.x < Board.rows - 1)
         {
-            MoveTo(Board.Instance.GetLilyAtPosition(coordinates + new Vector2Int(1, 0)));
+            if (Board.Instance.GetLilyAtPosition(coordinates).GetHorizontalBridge().GetActiveState())
+            {
+                Board.Instance.GetLilyAtPosition(coordinates).GetHorizontalBridge().SetActiveState(false);
+                MoveTo(Board.Instance.GetLilyAtPosition(coordinates + new Vector2Int(1, 0)));
+            }
         }
     }
 
@@ -70,7 +82,11 @@ public class Frog : MonoBehaviour
     {
         if (coordinates.x > 0)
         {
-            MoveTo(Board.Instance.GetLilyAtPosition(coordinates + new Vector2Int(-1, 0)));
+            if (Board.Instance.GetLilyAtPosition(coordinates - new Vector2Int(1, 0)).GetHorizontalBridge().GetActiveState())
+            {
+                Board.Instance.GetLilyAtPosition(coordinates - new Vector2Int(1, 0)).GetHorizontalBridge().SetActiveState(false);
+                MoveTo(Board.Instance.GetLilyAtPosition(coordinates + new Vector2Int(-1, 0)));
+            }
         }
     }
 }

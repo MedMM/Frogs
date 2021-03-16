@@ -38,7 +38,7 @@ public class Bridge : MonoBehaviour
 
     public void SetActiveState()
     {
-        SetActiveState(isActive);
+        SetActiveState(!isActive);
     }
 
     public bool GetActiveState()

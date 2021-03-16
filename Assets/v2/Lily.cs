@@ -53,4 +53,15 @@ public class Lily : MonoBehaviour
     {
         SetCoordinates(new Vector2Int(x, y));
     }
+
+    public Bridge GetVerticalBridge()
+    {
+        return verBridge;
+    }
+
+    public Bridge GetHorizontalBridge()
+    {
+        return horBridge;
+    }
+
 }
