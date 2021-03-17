@@ -20,14 +20,14 @@ public class Player : MonoBehaviour
 
     private void PlaceFrog(Lily lily)
     {
-        if (frogInHand.onMainBase == false)
-        {
-            Board.Instance.GetLilyAtPosition(frogInHand.GetCoordinates()).isOccupied = false;
-        }
-
         frogInHand.MoveTo(lily);
-        lily.isOccupied = true;
         EndTurn();
+    }
+
+    private void PlantFrog(Frog frog)
+    {
+        frog.onMainBase = false;
+        frog.PlantFrog();
     }
 
     private void HideCursor()
@@ -48,14 +48,10 @@ public class Player : MonoBehaviour
 
     private void EndTurn()
     {
+        return;
         frogInHand = null;
         HideCursor();
         Players.Instance.NextPlayer();
-    }
-
-    private void EnemyFrogClick()
-    {
-        Debug.Log("That's not my frog!");
     }
 
     public void SetHalfLily(HalfLily newHalfLily)
@@ -105,7 +101,20 @@ public class Player : MonoBehaviour
     {
         if (frogInHand)
         {
-            PlaceFrog(lily);
+            if (frogInHand.onMainBase)
+            {
+                PlantFrog(frogInHand);
+                return;
+            }
+
+            if (Board.Instance.IsLilyNearbyToEachOther(lily, Board.Instance.GetLilyAtPosition(frogInHand.GetCoordinates())))
+            {
+                if (Board.Instance.IsFrogCanJumpOnLily(frogInHand.GetCoordinates(), lily))
+                {
+                    PlaceFrog(lily);
+                    return;
+                }
+            }
         }
         else
         {

@@ -6,6 +6,7 @@ public class HalfLily : MonoBehaviour
     [SerializeField] private Frog frogPrefab = null;
     [SerializeField] private Lily neighborLily = null;
     [SerializeField] private Player playerPrefab = null;
+    [SerializeField] private Vector2Int coordinates = Vector2Int.zero;
     [SerializeField] private Transform spot1 = null;
     [SerializeField] private Transform spot2 = null;
     [SerializeField] private Transform spot3 = null;
@@ -47,5 +48,15 @@ public class HalfLily : MonoBehaviour
     public Lily GetNeighborLily()
     {
         return neighborLily;
+    }
+
+    public void SetCoordinates(Vector2Int newCoordinates)
+    {
+        coordinates = newCoordinates;
+    }
+
+    public Vector2Int GetCoordinates()
+    {
+        return coordinates;
     }
 }

@@ -31,15 +31,17 @@ public class Frog : MonoBehaviour
 
     public void MoveTo(Lily lily)
     {
-        if (onMainBase)
-        {
-            onMainBase = false;
-            MoveTo(player.GetHalfLily().GetNeighborLily());
-            return;
-        }
-
+        Board.Instance.GetLilyAtPosition(coordinates).isOccupied = false;
         coordinates = lily.GetCoordinates();
         transform.position = lily.transform.position;
+        Board.Instance.GetLilyAtPosition(coordinates).isOccupied = true;
+    }
+
+    public void PlantFrog()
+    {
+        coordinates = player.GetHalfLily().GetNeighborLily().GetCoordinates();
+        transform.position = player.GetHalfLily().GetNeighborLily().transform.position;
+        Board.Instance.GetLilyAtPosition(coordinates).isOccupied = true;
     }
 
     public void MoveUp()

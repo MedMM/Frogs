@@ -8,7 +8,7 @@ public class Lily : MonoBehaviour
     [SerializeField] private Vector2Int coordinates = Vector2Int.zero;
     private Bridge verBridge = null;
     private Bridge horBridge = null;
-    public bool isOccupied { get; set; } = false;
+    public bool isOccupied = false;
 
     private void Start()
     {
