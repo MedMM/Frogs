@@ -4,8 +4,12 @@ using UnityEngine;
 
 public class Lily : MonoBehaviour
 {
+    [SerializeField] private Transform spaceForFrog1;
+    [SerializeField] private Transform spaceForFrog2;
+
     [SerializeField] private GameObject bridgePrefab = null;
     [SerializeField] private Vector2Int coordinates = Vector2Int.zero;
+    [SerializeField] private Frog frogOnTop = null;
     private Bridge verBridge = null;
     private Bridge horBridge = null;
     public bool isOccupied = false;
@@ -39,10 +43,25 @@ public class Lily : MonoBehaviour
         }
     }
 
+    public bool GetOccupiedState()
+    {
+        return isOccupied;
+    }
+
+    public void SetOccupiedState(bool state)
+    {
+        isOccupied = state;
+    }
+
     public Vector2Int GetCoordinates()
     {
         return coordinates;
     } 
+
+    public Vector3 GetPosition()
+    {
+        return isOccupied ? spaceForFrog1.position : spaceForFrog2.position;
+    }
 
     public void SetCoordinates(Vector2Int newCoordinates)
     {

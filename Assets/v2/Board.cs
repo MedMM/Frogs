@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using System.Linq;
 
 public class Board : MonoBehaviour
 {
@@ -9,6 +10,7 @@ public class Board : MonoBehaviour
     private static Board instance = null;
     public static Board Instance { get { return instance; } }
     private Lily[,] lilyArray = new Lily[rows, rows];
+    private Frog[] allFrogs;
 
     public const int rows = 5;
 
@@ -22,6 +24,19 @@ public class Board : MonoBehaviour
         instance = this;
 
         BuildBoard();
+
+
+    }
+
+    private void Start()
+    {
+        Invoke("FindAllFrogs", .2f);
+    }
+
+    private void FindAllFrogs()
+    {
+        allFrogs = FindObjectsOfType<Frog>();
+
     }
 
     private void BuildBoard()
@@ -48,122 +63,7 @@ public class Board : MonoBehaviour
         player2Base.GetComponent<HalfLily>().SetNeighborLily(GetLilyAtPosition(2, 4));
     }
 
-    public Lily GetLilyAtPosition(int x, int y)
-    {
-        return lilyArray[x, y];
-    }
-
-    public Lily GetLilyAtPosition(Vector2Int coordinates)
-    {
-        return GetLilyAtPosition(coordinates.x, coordinates.y);
-    }
-
-    public bool IsLilyExist(Vector2Int coordinates)
-    {
-        return (coordinates.x >= 0 && coordinates.x < rows &&
-                coordinates.y >= 0 && coordinates.y < rows);
-    }
-
-    public bool IsLilyNearbyToEachOther(Lily lily1, Lily lily2)
-    {
-        var pos1 = lily1.GetCoordinates();
-        var pos2 = lily2.GetCoordinates();
-        return (pos1.x == pos2.x && Mathf.Abs(pos1.y - pos2.y) == 1) ||
-                (pos1.y == pos2.y && Mathf.Abs(pos1.x - pos2.x) == 1);
-    }
-
-    public bool IsFrogCanJumpOnLily(Vector2Int frogPosition, Lily lily)
-    {
-        Vector2Int direction = frogPosition - lily.GetCoordinates(); //Откуда прыгает жаба с frogCoordinates
-        bool state = false;
-
-        if (!IsBridgesAllowToJumpOnLily(frogPosition, lily))
-        {
-            return false;
-        }
-
-        if (!lily.isOccupied)
-        {
-            return true;
-        }
-
-        //Проверяет может ли жаба упрыгнуть вверх
-        //Сверху лилии стоит мостик и на лилию прыгают не сверху?
-        if (IsLilyExist(lily.GetCoordinates() + Vector2Int.up))
-        {
-            Lily upLily = GetLilyAtPosition(lily.GetCoordinates() + Vector2Int.up);
-
-            if (lily.GetVerticalBridge().GetActiveState() && direction != Vector2Int.up)
-            {
-                //Если на лилии сверху другая жаба
-                if (upLily.isOccupied)
-                {
-                    state |= IsFrogCanJumpOnLily(lily.GetCoordinates(), upLily);
-                }
-                else
-                {
-                    return true;
-                }
-            }
-        }
-        //Проверяет может ли жаба упрыгнуть вправо
-        if (IsLilyExist(lily.GetCoordinates() + Vector2Int.right))
-        {
-            Lily rightLily = GetLilyAtPosition(lily.GetCoordinates() + Vector2Int.right);
-
-            if (lily.GetHorizontalBridge().GetActiveState() && direction != Vector2Int.right)
-            {
-                //Если на лилии справа другая жаба
-                if (rightLily.isOccupied)
-                {
-                    state |= IsFrogCanJumpOnLily(lily.GetCoordinates(), rightLily);
-                }
-                else
-                {
-                    return true;
-                }
-            }
-        }
-        //Проверяет может ли жаба упрыгнуть влево
-        if (IsLilyExist(lily.GetCoordinates() + Vector2Int.left))
-        {
-            Lily leftLily = GetLilyAtPosition(lily.GetCoordinates() + Vector2Int.left);
-
-            if (leftLily.GetHorizontalBridge().GetActiveState() && direction != Vector2Int.left)
-            {
-                //Если на лилии слева другая жаба
-                if (leftLily.isOccupied)
-                {
-                    state |= IsFrogCanJumpOnLily(lily.GetCoordinates(), leftLily);
-                }
-                else
-                {
-                    return true;
-                }
-            }
-        }
-        //Проверяет может ли жаба упрыгнуть вниз
-        if (IsLilyExist(lily.GetCoordinates() + Vector2Int.down))
-        {
-            Lily downLily = GetLilyAtPosition(lily.GetCoordinates() + Vector2Int.down);
-
-            if (downLily.GetVerticalBridge().GetActiveState() && direction != Vector2Int.down)
-            {
-                //Если на лилии снизу другая жаба
-                if (downLily.isOccupied)
-                {
-                    state |= IsFrogCanJumpOnLily(lily.GetCoordinates(), downLily);
-                }
-                else
-                {
-                    return true;
-                }
-            }
-        }
-        return state;
-    }
-
-    public bool IsBridgesAllowToJumpOnLily(Vector2Int frogPosition, Lily lily)
+    private bool IsBridgesAllowToJumpOnLily(Vector2Int frogPosition, Lily lily)
     {
         Vector2Int direction = frogPosition - lily.GetCoordinates();
 
@@ -188,5 +88,130 @@ public class Board : MonoBehaviour
         }
 
         throw new System.Exception("Unexpected Values ");
+    }
+
+    public Frog GetFrogAtPosition(Vector2Int frogPosition)
+    {
+        return allFrogs.Where(x => x.GetCoordinates() == frogPosition).First();
+    }
+
+    public Lily GetLilyAtPosition(int x, int y)
+    {
+        return lilyArray[x, y];
+    }
+
+    public Lily GetLilyAtPosition(Vector2Int coordinates)
+    {
+        return GetLilyAtPosition(coordinates.x, coordinates.y);
+    }
+
+    public bool IsLilyExist(Vector2Int coordinates)
+    {
+        return (coordinates.x >= 0 && coordinates.x < rows &&
+                coordinates.y >= 0 && coordinates.y < rows);
+    }
+
+    public bool IsFrogOnThisCoordinatesExist(Vector2Int coordinates)
+    {
+        return allFrogs.Where(x => x.GetCoordinates() == coordinates).Count() > 0;
+    }
+
+    public bool IsLilyNearbyToEachOther(Lily lily1, Lily lily2)
+    {
+        var pos1 = lily1.GetCoordinates();
+        var pos2 = lily2.GetCoordinates();
+        return (pos1.x == pos2.x && Mathf.Abs(pos1.y - pos2.y) == 1) ||
+                (pos1.y == pos2.y && Mathf.Abs(pos1.x - pos2.x) == 1);
+    }
+
+    public bool IsFrogCanJumpOnLily(Vector2Int frogPosition, Lily lily)
+    {
+        Vector2Int direction = frogPosition - lily.GetCoordinates(); //Откуда прыгает жаба с frogCoordinates
+        bool state = false;
+
+        if (!IsBridgesAllowToJumpOnLily(frogPosition, lily))
+        {
+            return false;
+        }
+
+        if (! lily.GetOccupiedState())
+        {
+            return true;
+        }
+
+        //Проверяет может ли жаба упрыгнуть вверх
+        //Сверху лилии стоит мостик и на лилию прыгают не сверху?
+        if (IsLilyExist(lily.GetCoordinates() + Vector2Int.up))
+        {
+            Lily upLily = GetLilyAtPosition(lily.GetCoordinates() + Vector2Int.up);
+
+            if (lily.GetVerticalBridge().GetActiveState() && direction != Vector2Int.up)
+            {
+                //Если на лилии сверху другая жаба
+                if (upLily.GetOccupiedState())
+                {
+                    state |= IsFrogCanJumpOnLily(lily.GetCoordinates(), upLily);
+                }
+                else
+                {
+                    return true;
+                }
+            }
+        }
+        //Проверяет может ли жаба упрыгнуть вправо
+        if (IsLilyExist(lily.GetCoordinates() + Vector2Int.right))
+        {
+            Lily rightLily = GetLilyAtPosition(lily.GetCoordinates() + Vector2Int.right);
+
+            if (lily.GetHorizontalBridge().GetActiveState() && direction != Vector2Int.right)
+            {
+                //Если на лилии справа другая жаба
+                if (rightLily.GetOccupiedState())
+                {
+                    state |= IsFrogCanJumpOnLily(lily.GetCoordinates(), rightLily);
+                }
+                else
+                {
+                    return true;
+                }
+            }
+        }
+        //Проверяет может ли жаба упрыгнуть влево
+        if (IsLilyExist(lily.GetCoordinates() + Vector2Int.left))
+        {
+            Lily leftLily = GetLilyAtPosition(lily.GetCoordinates() + Vector2Int.left);
+
+            if (leftLily.GetHorizontalBridge().GetActiveState() && direction != Vector2Int.left)
+            {
+                //Если на лилии слева другая жаба
+                if (leftLily.GetOccupiedState())
+                {
+                    state |= IsFrogCanJumpOnLily(lily.GetCoordinates(), leftLily);
+                }
+                else
+                {
+                    return true;
+                }
+            }
+        }
+        //Проверяет может ли жаба упрыгнуть вниз
+        if (IsLilyExist(lily.GetCoordinates() + Vector2Int.down))
+        {
+            Lily downLily = GetLilyAtPosition(lily.GetCoordinates() + Vector2Int.down);
+
+            if (downLily.GetVerticalBridge().GetActiveState() && direction != Vector2Int.down)
+            {
+                //Если на лилии снизу другая жаба
+                if (downLily.GetOccupiedState())
+                {
+                    state |= IsFrogCanJumpOnLily(lily.GetCoordinates(), downLily);
+                }
+                else
+                {
+                    return true;
+                }
+            }
+        }
+        return state;
     }
 }

@@ -122,9 +122,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6465fca3e1926ae43b1d616ca3b9e3db, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  coordinates: {x: 0, y: 0}
-  board: {fileID: 0}
-  player: {fileID: 0}
+  coordinates: {x: 20, y: 20}
+  onMainBase: 1
 --- !u!1 &4853170124870813323
 GameObject:
   m_ObjectHideFlags: 0

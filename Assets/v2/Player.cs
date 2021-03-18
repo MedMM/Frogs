@@ -2,7 +2,7 @@
 
 public class Player : MonoBehaviour
 {
-    [SerializeField] private GameObject pointer = null;
+    [SerializeField] private Cursor cursor = null;
     [SerializeField] private HalfLily halfLily = null;
     [SerializeField] private Frog frogInHand = null;
     [SerializeField] private Color teamColor = Color.white;
@@ -10,15 +10,17 @@ public class Player : MonoBehaviour
     private void Awake()
     {
         Players.Instance.RecordNewPlayer(this);
-        HideCursor();
+        cursor.Hide();
     }
 
     private void TakeFrog(Frog frog)
     {
         frogInHand = frog;
+        cursor.SetGameObjectToFollow(frog.gameObject);
+        cursor.Show();
     }
 
-    private void PlaceFrog(Lily lily)
+    private void MoveFrog(Lily lily)
     {
         frogInHand.MoveTo(lily);
         EndTurn();
@@ -30,27 +32,11 @@ public class Player : MonoBehaviour
         frog.PlantFrog();
     }
 
-    private void HideCursor()
-    {
-        pointer.SetActive(false);
-    }
-
-    private void ShowCursor()
-    {
-        pointer.SetActive(true);
-    }
-
-    private void MoveCursor(Vector3 newPosition)
-    {
-        pointer.transform.position = newPosition;
-        ShowCursor();
-    }
-
     private void EndTurn()
     {
         return;
         frogInHand = null;
-        HideCursor();
+        cursor.Hide();
         Players.Instance.NextPlayer();
     }
 
@@ -88,7 +74,6 @@ public class Player : MonoBehaviour
         if (frogInHand == null)
         {
             TakeFrog(frog);
-            MoveCursor(frog.transform.position);
         }
         else
         {
@@ -111,8 +96,18 @@ public class Player : MonoBehaviour
             {
                 if (Board.Instance.IsFrogCanJumpOnLily(frogInHand.GetCoordinates(), lily))
                 {
-                    PlaceFrog(lily);
-                    return;
+                    if (lily.GetOccupiedState())
+                    {
+                        var leftHand = Board.Instance.GetFrogAtPosition(lily.GetCoordinates());
+                        MoveFrog(lily);
+                        TakeFrog(leftHand);
+                        return;
+                    }
+                    else
+                    {
+                        MoveFrog(lily);
+                        return;
+                    }
                 }
             }
         }
@@ -132,20 +127,5 @@ public class Player : MonoBehaviour
         //    bridge.SetActiveState(true);
         //    EndTurn();
         //}
-    }
-
-    private void Update()
-    {
-        if (frogInHand != null)
-        {
-            if (Input.GetKeyDown(KeyCode.W))
-                frogInHand.MoveUp();
-            if (Input.GetKeyDown(KeyCode.S))
-                frogInHand.MoveDown();
-            if (Input.GetKeyDown(KeyCode.D))
-                frogInHand.MoveRight();
-            if (Input.GetKeyDown(KeyCode.A))
-                frogInHand.MoveLeft();
-        }
     }
 }
