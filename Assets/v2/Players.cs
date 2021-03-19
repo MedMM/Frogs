@@ -3,8 +3,8 @@ using UnityEngine;
 
 public class Players : MonoBehaviour
 {
+    [SerializeField] private Player _currentPlayer;
     private List<Player> players = new List<Player>();
-    private Player _currentPlayer;
     private Color[] teamColors = new Color[] { Color.green, Color.red, Color.yellow, Color.blue };
     //private 
     private static Players instance = null;

@@ -4,12 +4,13 @@ public class HalfLily : MonoBehaviour
 {
     [SerializeField] private Bridge bridgePrefab = null;
     [SerializeField] private Frog frogPrefab = null;
-    [SerializeField] private Lily neighborLily = null;
     [SerializeField] private Player playerPrefab = null;
+    [SerializeField] private Lily neighborLily = null;
     [SerializeField] private Vector2Int coordinates = Vector2Int.zero;
     [SerializeField] private Transform spot1 = null;
     [SerializeField] private Transform spot2 = null;
     [SerializeField] private Transform spot3 = null;
+    [SerializeField] private int arrivedFrogs = 0;
 
     private void Start()
     {
@@ -38,6 +39,25 @@ public class HalfLily : MonoBehaviour
         var bridge = Instantiate(bridgePrefab, bridgePosition, Quaternion.Euler(0, 0, 0));
         bridge.transform.SetParent(gameObject.transform);
         bridge.transform.localPosition = bridgePosition;
+    }
+
+    public void EndPath(Frog frog)
+    {
+        switch (arrivedFrogs)
+        {
+            case 0:
+                frog.gameObject.transform.position = spot1.position;
+                break;
+            case 1:
+                frog.gameObject.transform.position = spot2.position;
+                break;
+            case 2:
+                frog.gameObject.transform.position = spot3.position;
+                break;
+
+            default:
+                break;
+        }
     }
 
     public void SetNeighborLily(Lily lily)

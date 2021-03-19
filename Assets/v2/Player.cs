@@ -6,6 +6,7 @@ public class Player : MonoBehaviour
     [SerializeField] private HalfLily halfLily = null;
     [SerializeField] private Frog frogInHand = null;
     [SerializeField] private Color teamColor = Color.white;
+    [SerializeField] private bool chainReaction = false;
 
     private void Awake()
     {
@@ -23,7 +24,6 @@ public class Player : MonoBehaviour
     private void MoveFrog(Lily lily)
     {
         frogInHand.MoveTo(lily);
-        EndTurn();
     }
 
     private void PlantFrog(Frog frog)
@@ -34,7 +34,6 @@ public class Player : MonoBehaviour
 
     private void EndTurn()
     {
-        return;
         frogInHand = null;
         cursor.Hide();
         Players.Instance.NextPlayer();
@@ -65,6 +64,12 @@ public class Player : MonoBehaviour
 
     public void ClickOnFrog(Frog frog)
     {
+        if (chainReaction)
+        {
+            Debug.Log("Сначала заверши цепную реакцию");
+            return;
+        }
+
         if (frog.GetPlayer() != this)
         {
             Debug.Log("Это чужая жаба, разворачивай!!");
@@ -94,13 +99,16 @@ public class Player : MonoBehaviour
                     {
                         if (lily.GetOccupiedState())
                         {
+                            chainReaction = true;
                             var leftHand = Board.Instance.GetFrogAtPosition(lily.GetCoordinates());
                             PlantFrog(frogInHand);
                             TakeFrog(leftHand);
                         }
                         else
                         {
+                            chainReaction = false;
                             PlantFrog(frogInHand);
+                            EndTurn();
                         }
                     }
 
@@ -114,15 +122,16 @@ public class Player : MonoBehaviour
                 {
                     if (lily.GetOccupiedState())
                     {
+                        chainReaction = true;
                         var leftHand = Board.Instance.GetFrogAtPosition(lily.GetCoordinates());
                         MoveFrog(lily);
                         TakeFrog(leftHand);
-                        return;
                     }
                     else
                     {
+                        chainReaction = false;
                         MoveFrog(lily);
-                        return;
+                        EndTurn();
                     }
                 }
             }
@@ -135,13 +144,10 @@ public class Player : MonoBehaviour
 
     public void ClickOnBridge(Bridge bridge)
     {
-
-        bridge.SetActiveState();
-
-        //if (bridge.GetActiveState() == false)
-        //{
-        //    bridge.SetActiveState(true);
-        //    EndTurn();
-        //}
+        if (bridge.GetActiveState() == false && !chainReaction)
+        {
+            bridge.SetActiveState(true);
+            EndTurn();
+        }
     }
 }
