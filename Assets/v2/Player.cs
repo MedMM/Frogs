@@ -88,7 +88,23 @@ public class Player : MonoBehaviour
         {
             if (frogInHand.onMainBase)
             {
-                PlantFrog(frogInHand);
+                if (Board.Instance.IsLilyNearbyToEachOther(lily.GetCoordinates(), halfLily.GetCoordinates()))
+                {
+                    if (Board.Instance.IsFrogCanJumpOnLily(halfLily.GetCoordinates(), lily, true))
+                    {
+                        if (lily.GetOccupiedState())
+                        {
+                            var leftHand = Board.Instance.GetFrogAtPosition(lily.GetCoordinates());
+                            PlantFrog(frogInHand);
+                            TakeFrog(leftHand);
+                        }
+                        else
+                        {
+                            PlantFrog(frogInHand);
+                        }
+                    }
+
+                }
                 return;
             }
 

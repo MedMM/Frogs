@@ -60,6 +60,10 @@ public class Lily : MonoBehaviour
 
     public Vector3 GetPosition()
     {
+        var temp = spaceForFrog1;
+        spaceForFrog1 = spaceForFrog2;
+        spaceForFrog2 = temp;
+
         return isOccupied ? spaceForFrog1.position : spaceForFrog2.position;
     }
 

@@ -63,9 +63,9 @@ public class Board : MonoBehaviour
         player2Base.GetComponent<HalfLily>().SetNeighborLily(GetLilyAtPosition(2, 4));
     }
 
-    private bool IsBridgesAllowToJumpOnLily(Vector2Int frogPosition, Lily lily)
+    private bool IsBridgesAllowToJumpOnLily(Vector2Int jumpDirection, Lily lily)
     {
-        Vector2Int direction = frogPosition - lily.GetCoordinates();
+        Vector2Int direction = jumpDirection - lily.GetCoordinates();
 
         if (direction == Vector2Int.up)
         {
@@ -116,25 +116,39 @@ public class Board : MonoBehaviour
         return allFrogs.Where(x => x.GetCoordinates() == coordinates).Count() > 0;
     }
 
+    public bool IsLilyNearbyToEachOther(Vector2Int pos1, Vector2Int pos2)
+    {
+        return (pos1.x == pos2.x && Mathf.Abs(pos1.y - pos2.y) == 1) ||
+            (pos1.y == pos2.y && Mathf.Abs(pos1.x - pos2.x) == 1);
+    }
+
     public bool IsLilyNearbyToEachOther(Lily lily1, Lily lily2)
     {
-        var pos1 = lily1.GetCoordinates();
-        var pos2 = lily2.GetCoordinates();
+        Vector2Int pos1 = lily1.GetCoordinates();
+        Vector2Int pos2 = lily2.GetCoordinates();
         return (pos1.x == pos2.x && Mathf.Abs(pos1.y - pos2.y) == 1) ||
                 (pos1.y == pos2.y && Mathf.Abs(pos1.x - pos2.x) == 1);
     }
 
     public bool IsFrogCanJumpOnLily(Vector2Int frogPosition, Lily lily)
     {
+        return IsFrogCanJumpOnLily(frogPosition, lily, false);
+    }
+
+    public bool IsFrogCanJumpOnLily(Vector2Int frogPosition, Lily lily, bool ignoreBridges)
+    {
         Vector2Int direction = frogPosition - lily.GetCoordinates(); //Откуда прыгает жаба с frogCoordinates
         bool state = false;
 
-        if (!IsBridgesAllowToJumpOnLily(frogPosition, lily))
+        if (ignoreBridges == false)
         {
-            return false;
+            if (!IsBridgesAllowToJumpOnLily(frogPosition, lily))
+            {
+                return false;
+            }
         }
 
-        if (! lily.GetOccupiedState())
+        if (!lily.GetOccupiedState())
         {
             return true;
         }
