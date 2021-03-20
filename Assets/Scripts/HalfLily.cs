@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 
 public class HalfLily : MonoBehaviour
 {
@@ -10,6 +11,7 @@ public class HalfLily : MonoBehaviour
     [SerializeField] private Transform spot1 = null;
     [SerializeField] private Transform spot2 = null;
     [SerializeField] private Transform spot3 = null;
+    [SerializeField] private Transform arrivedFrogsPosition = null;
     [SerializeField] private int arrivedFrogs = 0;
 
     private void Start()
@@ -29,7 +31,7 @@ public class HalfLily : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Mouse0))
         {
-            Debug.Log("Half lily clicked");
+            Players.Instance.CurrentPlayer.ClickOnHalfLily(this);
         }
     }
 
@@ -43,21 +45,15 @@ public class HalfLily : MonoBehaviour
 
     public void EndPath(Frog frog)
     {
-        switch (arrivedFrogs)
+        neighborLily.SetOccupiedState(false);
+        LeanTween.move(frog.gameObject, arrivedFrogsPosition, 0.4f);
+        frog.OutOfGame();
+        arrivedFrogs += 1;
+        if (arrivedFrogs >= 3)
         {
-            case 0:
-                frog.gameObject.transform.position = spot1.position;
-                break;
-            case 1:
-                frog.gameObject.transform.position = spot2.position;
-                break;
-            case 2:
-                frog.gameObject.transform.position = spot3.position;
-                break;
-
-            default:
-                break;
+            Board.Instance.gameObject.GetComponent<GameManager>().OverGame(frog.GetPlayer());
         }
+
     }
 
     public void SetNeighborLily(Lily lily)

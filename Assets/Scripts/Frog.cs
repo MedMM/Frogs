@@ -7,6 +7,11 @@ public class Frog : MonoBehaviour
     public bool onMainBase = true;
     private float animationTime = 0.4f;
 
+    private void Start()
+    {
+        transform.position = new Vector3(transform.position.x, transform.position.y, -20);
+    }
+
     private void OnMouseOver()
     {
         if (Input.GetKeyDown(KeyCode.Mouse0))
@@ -35,6 +40,12 @@ public class Frog : MonoBehaviour
         {
             Board.Instance.GetLilyAtPosition(coordinates - new Vector2Int(0, 1)).GetVerticalBridge().SetActiveState(false);
         }
+    }
+
+    public void OutOfGame()
+    {
+        coordinates = new Vector2Int(20, 20);
+        gameObject.GetComponent<BoxCollider2D>().enabled = false;
     }
 
     public void SetPlayer(Player player)
@@ -73,5 +84,4 @@ public class Frog : MonoBehaviour
         LeanTween.move(gameObject, player.GetHalfLily().GetNeighborLily().GetPosition(), animationTime);
         Board.Instance.GetLilyAtPosition(coordinates).SetOccupiedState(true);
     }
-
 }

@@ -34,6 +34,7 @@ public class Player : MonoBehaviour
 
     private void EndTurn()
     {
+        chainReaction = false;
         frogInHand = null;
         cursor.Hide();
         Players.Instance.NextPlayer();
@@ -139,6 +140,21 @@ public class Player : MonoBehaviour
         else
         {
             Debug.Log("Крутая лилия, согласен");
+        }
+    }
+
+    public void ClickOnHalfLily(HalfLily halfLily)
+    {
+        Debug.Log(1);
+        if (frogInHand && frogInHand.GetPlayer() == this )
+        {
+                Debug.Log(2);
+            if (this.halfLily != halfLily && frogInHand.GetCoordinates() == halfLily.GetNeighborLily().GetCoordinates())
+            {
+                Debug.Log(3);
+                halfLily.EndPath(frogInHand);
+                EndTurn();
+            }
         }
     }
 
